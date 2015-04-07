@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title">Eat Now</string>
+    <string name="rangeText">Maximum distance in km from restaurant</string>
+    <string name="rangeKm">10</string>
+    <string name="search">Search restaurant by name</string>
+    <string name="searchbtn">Search</string>
 </resources>
