@@ -1,4 +1,4 @@
-package com.example.patrick.mbd2_eetnu;
+package com.patrick_youri.android.mbd2_eetnu;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
