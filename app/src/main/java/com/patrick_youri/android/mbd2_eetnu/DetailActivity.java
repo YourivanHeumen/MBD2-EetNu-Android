@@ -1,7 +1,6 @@
 package com.patrick_youri.android.mbd2_eetnu;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.res.Configuration;
 import android.os.Bundle;
 

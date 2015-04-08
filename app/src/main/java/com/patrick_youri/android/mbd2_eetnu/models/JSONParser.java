@@ -1,3 +1,5 @@
+package com.patrick_youri.android.mbd2_eetnu.models;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +21,7 @@ public abstract class JSONParser {
         StringBuilder response = new StringBuilder();
 
         HttpURLConnection httpconn = (HttpURLConnection)url.openConnection();
-
+        int code = httpconn.getResponseCode();
         if (httpconn.getResponseCode() == HttpURLConnection.HTTP_OK)
         {
             BufferedReader input = new BufferedReader(new InputStreamReader(httpconn.getInputStream()),8192);
@@ -33,8 +35,8 @@ public abstract class JSONParser {
         return response.toString();
     }
 
-    public static List<Venue> parseJSONResponse(String json){
-        List<Venue> venues = new ArrayList<Venue>();
+    public static ArrayList<Venue> parseJSONResponse(String json){
+        ArrayList<Venue> venues = new ArrayList<Venue>();
 
         try {
             JSONArray jsonArray = new JSONObject(json).getJSONArray("results");
@@ -62,8 +64,8 @@ public abstract class JSONParser {
                 double longitude = jsonGeolocationObject.getDouble("longitude");
 
                 Venue venue = new Venue(id, name, category, website_url, telephone,
-                                        new Address(street, zipcode, city, region, country),
-                                        new Geolocation(latitude, longitude), distance);
+                        new Address(street, zipcode, city, region, country),
+                        new Geolocation(latitude, longitude), distance);
 
                 venues.add(venue);
             }

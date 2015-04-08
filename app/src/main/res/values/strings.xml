@@ -8,4 +8,5 @@
     <string name="rangeKm">10</string>
     <string name="search">Search restaurant by name</string>
     <string name="searchbtn">Search</string>
+    <string name="listname">Name</string>
 </resources>

@@ -1,3 +1,5 @@
+package com.patrick_youri.android.mbd2_eetnu.models;
+
 /**
  * Created by Youri on 7-4-2015.
  */
