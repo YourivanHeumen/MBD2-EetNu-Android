@@ -2,7 +2,11 @@ package com.patrick_youri.android.mbd2_eetnu;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -44,12 +48,16 @@ public class ListFragment extends Fragment {
         if (activity instanceof OnItemSelectedListener) {
             listener = (OnItemSelectedListener) activity;
 
-            Location mLastLocation = ((ListActivity) activity).getLastLocation();
+            LocationManager locationManager = (LocationManager) ((ListActivity)activity).getSystemService(Context.LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            String provider = locationManager.getBestProvider(criteria, false);
+            Location mLocation = locationManager.getLastKnownLocation(provider);
+
             double lat;
             double lng;
-            if (mLastLocation != null) {
-                lat = mLastLocation.getLatitude();
-                lng = mLastLocation.getLongitude();
+            if (mLocation != null) {
+                lat = mLocation.getLatitude();
+                lng = mLocation.getLongitude();
             } else {
                 lat = 51.6883248;
                 lng = 5.2869616;
