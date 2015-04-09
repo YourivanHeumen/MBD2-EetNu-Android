@@ -12,8 +12,8 @@ import com.patrick_youri.android.mbd2_eetnu.models.Venue;
 public class DetailFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_venue_detail,
                 container, false);
         return view;
