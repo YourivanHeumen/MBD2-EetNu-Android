@@ -9,8 +9,6 @@ public class SettingsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.fragment_settings);
-
         Intent intent = getIntent();
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()
