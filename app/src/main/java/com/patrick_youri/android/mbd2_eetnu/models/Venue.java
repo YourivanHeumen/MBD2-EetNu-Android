@@ -1,10 +1,12 @@
 package com.patrick_youri.android.mbd2_eetnu.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Youri on 7-4-2015.
  */
-public class Venue {
-
+public class Venue implements Serializable {
+    private static final long serialVersionUID = -7060210544600464481L;
     private int id;
     private String name;
     private String category;

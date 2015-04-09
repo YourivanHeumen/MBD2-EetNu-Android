@@ -5,13 +5,13 @@ import android.app.Fragment;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.patrick_youri.android.mbd2_eetnu.adapters.VenuesAdapter;
@@ -24,10 +24,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    private OnItemSelectedListener listener;
+    private onItemClick listener;
     private ListView listView;
+    private VenuesAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,17 +39,13 @@ public class ListFragment extends Fragment {
         return view;
     }
 
-    public interface OnItemSelectedListener {
-        public void onRssItemSelected(String link);
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof OnItemSelectedListener) {
-            listener = (OnItemSelectedListener) activity;
+        if (activity instanceof onItemClick) {
+            listener = (onItemClick) activity;
 
-            LocationManager locationManager = (LocationManager) ((ListActivity)activity).getSystemService(Context.LOCATION_SERVICE);
+            LocationManager locationManager = (LocationManager) ((ListActivity) activity).getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             String provider = locationManager.getBestProvider(criteria, false);
             Location mLocation = locationManager.getLastKnownLocation(provider);
@@ -63,28 +60,30 @@ public class ListFragment extends Fragment {
                 lng = 5.2869616;
             }
 
-            new AsyncGetJSON().execute("https://api.eet.nu/venues?max_distance=1.5&geolocation="+lat+","+lng);
+            new AsyncGetJSON().execute("https://api.eet.nu/venues?max_distance=1.5&geolocation=" + lat + "," + lng);
 
         } else {
             throw new ClassCastException(activity.toString()
-                    + " must implemenet MyListFragment.OnItemSelectedListener");
+                    + " must implemenet ListFragment.onItemClick");
         }
 
     }
 
-    public void generateList(ArrayList<Venue> venues) {
-        listView = (ListView) getActivity().findViewById(R.id.list);
-        VenuesAdapter adapter = new VenuesAdapter(getActivity(), R.layout.item_venue, venues);
-        listView.setAdapter(adapter);
+    public interface onItemClick {
+        public void onAdapterItemSelected(Venue venue);
     }
 
+    public void generateList(ArrayList<Venue> venues) {
+        listView = (ListView) getActivity().findViewById(R.id.list);
+        adapter = new VenuesAdapter(getActivity(), R.layout.item_venue, venues);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+    }
 
-    // May also be triggered from the Activity
-    public void updateDetail() {
-        // create fake data
-        String newTime = String.valueOf(System.currentTimeMillis());
-        // Send data to Activity
-        listener.onRssItemSelected(newTime);
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Venue item_clicked = adapter.getItem(position);
+        listener.onAdapterItemSelected(item_clicked);
     }
 
 

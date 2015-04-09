@@ -1,10 +1,12 @@
 package com.patrick_youri.android.mbd2_eetnu.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Youri on 7-4-2015.
  */
-public class Geolocation {
-
+public class Geolocation implements Serializable {
+    private static final long serialVersionUID = -7060210544600464483L;
     private double latitude;
     private double longitude;
 

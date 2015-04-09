@@ -17,8 +17,16 @@ import java.util.ArrayList;
  */
 public class VenuesAdapter extends ArrayAdapter<Venue> {
 
+    private ArrayList<Venue> venues;
+
     public VenuesAdapter(Context context, int resource, ArrayList<Venue> venues) {
         super(context, resource, venues);
+        this.venues = venues;
+    }
+
+    @Override
+    public Venue getItem(int position) {
+        return venues.get(position);
     }
 
     @Override

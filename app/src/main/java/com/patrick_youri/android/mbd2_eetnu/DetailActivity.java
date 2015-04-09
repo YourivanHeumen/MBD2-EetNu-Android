@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import com.patrick_youri.android.mbd2_eetnu.models.Venue;
+
 public class DetailActivity extends Activity {
-    public static final String EXTRA_URL = "url";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,13 +18,17 @@ public class DetailActivity extends Activity {
             finish();
             return;
         }
+
         setContentView(R.layout.activity_detail);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String url = extras.getString(EXTRA_URL);
+
+        Venue venue = (Venue)getIntent().getSerializableExtra(ListActivity.SER_KEY);
+        if(venue != null) {
             DetailFragment detailFragment = (DetailFragment) getFragmentManager()
                     .findFragmentById(R.id.detailFragment);
-            detailFragment.setText(url);
+            if(detailFragment != null) {
+                detailFragment.setVenue(venue);
+            }
         }
+
     }
 }
