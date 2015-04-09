@@ -1,8 +1,13 @@
 package com.patrick_youri.android.mbd2_eetnu;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.patrick_youri.android.mbd2_eetnu.models.Venue;
 
@@ -29,9 +34,31 @@ public class ListActivity extends Activity implements
             intent.putExtras(mBundle);
 
             startActivity(intent);
-
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_settings was selected
+            case R.id.action_settings:
+                Intent intent = new Intent(getApplicationContext(),
+                        SettingsActivity.class);
+                startActivity(intent);
+
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
 }
 
