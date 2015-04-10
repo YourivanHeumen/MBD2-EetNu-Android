@@ -3,11 +3,13 @@ package com.patrick_youri.android.mbd2_eetnu;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +62,10 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
                 lng = 5.2869616;
             }
 
-            new AsyncGetJSON().execute("https://api.eet.nu/venues?max_distance=1.5&geolocation=" + lat + "," + lng);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            String distance = preferences.getString("maxDistanceValue", "15");
+
+            new AsyncGetJSON().execute("https://api.eet.nu/venues?max_distance=" + distance + "&geolocation=" + lat + "," + lng);
 
         } else {
             throw new ClassCastException(activity.toString()
