@@ -73,7 +73,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         }
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        String distance = preferences.getString("maxDistanceValue", "15");
+        String distance = preferences.getString("maxDistanceValue", "10");
 
         new AsyncGetJSON().execute("https://api.eet.nu/venues?max_distance=" + distance + "&geolocation=" + lat + "," + lng);
     }
