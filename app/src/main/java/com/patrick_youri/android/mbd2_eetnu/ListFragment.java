@@ -47,31 +47,35 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         if (activity instanceof onItemClick) {
             listener = (onItemClick) activity;
 
-            LocationManager locationManager = (LocationManager) ((ListActivity) activity).getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-            String provider = locationManager.getBestProvider(criteria, false);
-            Location mLocation = locationManager.getLastKnownLocation(provider);
-
-            double lat;
-            double lng;
-            if (mLocation != null) {
-                lat = mLocation.getLatitude();
-                lng = mLocation.getLongitude();
-            } else {
-                lat = 51.6883248;
-                lng = 5.2869616;
-            }
-
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-            String distance = preferences.getString("maxDistanceValue", "15");
-
-            new AsyncGetJSON().execute("https://api.eet.nu/venues?max_distance=" + distance + "&geolocation=" + lat + "," + lng);
+            getRestaurantData(activity);
 
         } else {
             throw new ClassCastException(activity.toString()
                     + " must implemenet ListFragment.onItemClick");
         }
 
+    }
+
+    public void getRestaurantData(Activity activity){
+        LocationManager locationManager = (LocationManager) ((ListActivity) activity).getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, false);
+        Location mLocation = locationManager.getLastKnownLocation(provider);
+
+        double lat;
+        double lng;
+        if (mLocation != null) {
+            lat = mLocation.getLatitude();
+            lng = mLocation.getLongitude();
+        } else {
+            lat = 51.6883248;
+            lng = 5.2869616;
+        }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        String distance = preferences.getString("maxDistanceValue", "15");
+
+        new AsyncGetJSON().execute("https://api.eet.nu/venues?max_distance=" + distance + "&geolocation=" + lat + "," + lng);
     }
 
     public interface onItemClick {

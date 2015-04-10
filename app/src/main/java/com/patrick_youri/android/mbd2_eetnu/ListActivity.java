@@ -52,7 +52,9 @@ public class ListActivity extends Activity implements
                 Intent intent = new Intent(getApplicationContext(),
                         SettingsActivity.class);
                 startActivity(intent);
-
+            case R.id.action_refresh:
+                ListFragment fragment = (ListFragment) getFragmentManager().findFragmentById(R.id.listFragment);
+                fragment.getRestaurantData(this);
                 break;
             default:
                 break;
