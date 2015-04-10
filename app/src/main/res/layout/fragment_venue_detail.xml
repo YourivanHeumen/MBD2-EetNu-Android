@@ -18,15 +18,18 @@
             android:layout_marginTop="20dip"
             android:text="name"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:paddingLeft="5dp"
+            android:textAlignment="center" />
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:layout_width="325dp"
-            android:layout_height="380dp"
+            android:layout_height="330dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:stretchColumns="1"
-            android:layout_marginTop="30px">
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px">
             <TableRow android:background="@drawable/border">
                 <TextView
                     android:id="@+id/cityLabel"
@@ -148,5 +151,14 @@
                     android:minHeight="40dp"/>
             </TableRow>
         </TableLayout>
+
+        <Button
+            android:layout_width="251dp"
+            android:layout_height="50dp"
+            android:text="Call"
+            android:id="@+id/callbutton"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20px" />
+
     </LinearLayout>
 </RelativeLayout>
