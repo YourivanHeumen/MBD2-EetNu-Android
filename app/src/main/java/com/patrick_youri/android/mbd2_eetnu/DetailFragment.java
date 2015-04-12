@@ -59,7 +59,7 @@ public class DetailFragment extends Fragment {
                     Toast.makeText(getActivity(), "Call failed", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getActivity(), "Call failed, venue have no phonenumber", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Call failed, venue has no phonenumber", Toast.LENGTH_SHORT).show();
             }
         }
 

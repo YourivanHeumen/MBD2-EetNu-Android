@@ -12,9 +12,6 @@ import com.patrick_youri.android.mbd2_eetnu.models.Venue;
 
 import java.util.ArrayList;
 
-/**
- * Created by Youri on 8-4-2015.
- */
 public class VenuesAdapter extends ArrayAdapter<Venue> {
 
     private ArrayList<Venue> venues;
